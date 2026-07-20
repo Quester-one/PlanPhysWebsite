@@ -3,6 +3,24 @@
   padding: 86px 0;
 }
 
+.paper-figure {
+  display: flex;
+  flex-direction: column;
+}
+
+.paper-figure img {
+  height: auto;
+  margin: auto;
+  max-height: 620px;
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+.paper-figure figcaption {
+  width: 100%;
+}
+
 .stage-header {
   display: grid;
   gap: 32px;
@@ -20,17 +38,21 @@
   border-top: 1px solid var(--line);
   display: grid;
   gap: 50px;
-  grid-template-columns: minmax(300px, .78fr) minmax(0, 1.22fr);
+  grid-template-columns: 1fr;
   padding: 58px 0;
 }
 
+.study-copy {
+  max-width: 800px;
+}
+
 .study-row-reverse .study-copy {
-  order: 2;
+  order: initial;
 }
 
 .study-row-reverse > .paper-figure,
 .study-row-reverse > .figure-pair {
-  order: 1;
+  order: initial;
 }
 
 .study-copy h4,
@@ -87,7 +109,8 @@
   align-items: start;
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+  width: 100%;
 }
 
 .figure-pair .paper-figure {
@@ -98,8 +121,12 @@
 
 .figure-pair .paper-figure img {
   background: #fff;
-  height: 330px;
+  height: auto;
+  margin: auto;
+  max-height: 520px;
+  max-width: 100%;
   object-fit: contain;
+  width: auto;
 }
 
 .figure-pair .paper-figure figcaption {
@@ -108,6 +135,15 @@
 
 .study-figure {
   width: 100%;
+}
+
+.study-row > .study-figure img {
+  height: auto;
+  margin: auto;
+  max-height: 520px;
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
 }
 
 .merge-framework {
@@ -215,10 +251,6 @@
 
   .figure-pair {
     grid-template-columns: 1fr;
-  }
-
-  .figure-pair .paper-figure img {
-    height: 280px;
   }
 
   .condition-card {
