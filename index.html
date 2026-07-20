@@ -1,430 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>
-The Physics of Multi-Turn Long-Horizon Planning
-</title>
-
-<style>
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    color: #222;
-    background: white;
-}
-
-.container {
-    width: 85%;
-    max-width: 1100px;
-    margin: auto;
-}
-
-
-header {
-    text-align: center;
-    padding: 60px 20px 40px;
-}
-
-
-h1 {
-    font-size: 42px;
-    line-height: 1.25;
-    font-weight: 700;
-}
-
-
-.authors {
-    font-size: 20px;
-    margin-top: 25px;
-}
-
-
-.links {
-    margin-top: 25px;
-}
-
-
-.links a {
-    text-decoration: none;
-    margin: 10px;
-    padding: 10px 22px;
-    border-radius: 8px;
-    background: #222;
-    color:white;
-}
-
-
-section {
-    margin-top: 70px;
-}
-
-
-h2 {
-    font-size: 32px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-}
-
-
-p {
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-
-.teaser {
-    width:100%;
-    margin-top:30px;
-    border-radius:10px;
-}
-
-
-.figure {
-    width:100%;
-    margin-top:30px;
-    border-radius:10px;
-}
-
-
-.caption {
-    text-align:center;
-    color:#666;
-    font-size:15px;
-}
-
-
-.bibtex {
-    background:#f5f5f5;
-    padding:20px;
-    border-radius:10px;
-    font-family:monospace;
-    white-space:pre-wrap;
-}
-
-
-footer {
-    text-align:center;
-    margin:80px 0;
-    color:#777;
-}
-
-
-</style>
-
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Physics of Multi-Turn Long-Horizon Planning</title>
+  <meta name="description" content="A controlled study of long-horizon planning across pre-training, single-teacher OPD, and multi-teacher model merging.">
+  <meta property="og:title" content="The Physics of Multi-Turn Long-Horizon Planning">
+  <meta property="og:description" content="How planning ability is acquired, shaped, and integrated across three training stages.">
+  <meta property="og:image" content="https://quester-one.github.io/PlanPhysWebsite/assets/og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
-
 <body>
-
-
-<div class="container">
-
-
-<header>
-
-
-<h1>
-The Physics of Multi-Turn Long-Horizon Planning:
-<br>
-From Pre-training to Post-training via Single and Multi Teachers On-Policy Agentic Distillation
-</h1>
-
-
-<div class="authors">
-
-Tianyi Men
-
-<br><br>
-
-CASIA
-
-</div>
-
-
-<div class="links">
-
-<a href="#">
-Paper
-</a>
-
-<a href="https://github.com/Quester-one/PlanPhysCode">
-Code
-</a>
-
-<a href="https://huggingface.co/MultimodalAgent/TianyiMen_PlanPhys_Models">
-Models
-</a>
-
-<a href="https://huggingface.co/datasets/MultimodalAgent/TianyiMen_PlanPhys_Datasets">
-Datasets
-</a>
-
-</div>
-
-
-</header>
-
-
-
-
-<section>
-
-
-<h2>
-Abstract
-</h2>
-
-
-<p>
-
-Long-horizon multi-turn planning remains a fundamental challenge for
-agentic systems due to the difficulty of maintaining coherent reasoning,
-adapting to dynamic environments, and executing reliable actions over
-extended interactions.
-
-In this work, we study the physics of multi-turn long-horizon planning
-and investigate how planning capabilities emerge from pre-training and
-post-training.
-
-We introduce a unified framework based on
-Single-Teacher and Multi-Teacher On-Policy Agentic Distillation,
-enabling agents to progressively acquire planning behaviors through
-interaction-aware supervision.
-
-</p>
-
-
-<img class="teaser"
-src="assets/teaser.png">
-
-<div class="caption">
-Overview of our framework.
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section>
-
-
-<h2>
-Overview
-</h2>
-
-
-<p>
-
-We provide a systematic study of multi-turn long-horizon planning.
-Our analysis reveals that effective planning requires both
-strong pre-trained representations and efficient post-training
-alignment mechanisms.
-
-The proposed framework decomposes the learning process into:
-
-</p>
-
-
-<ul style="font-size:18px;line-height:2;">
-
-<li>
-Pre-training for fundamental world modeling and reasoning ability.
-</li>
-
-<li>
-Single-Teacher On-Policy Agentic Distillation for targeted behavioral refinement.
-</li>
-
-<li>
-Multi-Teacher On-Policy Agentic Distillation for scalable and diverse planning supervision.
-</li>
-
-</ul>
-
-
-<img class="figure"
-src="assets/overview.png">
-
-
-<div class="caption">
-Overall framework of our approach.
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section>
-
-
-<h2>
-Pre-Training
-</h2>
-
-
-<p>
-
-During pre-training, the model learns general knowledge,
-reasoning patterns, and environmental dynamics.
-
-We investigate how different pre-training strategies influence
-the emergence of long-horizon planning behaviors.
-
-
-</p>
-
-
-<img class="figure"
-src="assets/pretraining.png">
-
-
-<div class="caption">
-Pre-training pipeline.
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-
-<h2>
-Single-Teacher OPD
-</h2>
-
-
-<p>
-
-We introduce Single-Teacher On-Policy Agentic Distillation,
-where a student agent learns planning behaviors from a single expert
-teacher through on-policy trajectories.
-
-Unlike conventional imitation learning,
-our approach enables the student to learn from its own generated states,
-bridging the gap between training and deployment.
-
-
-</p>
-
-
-<img class="figure"
-src="assets/single_teacher.png">
-
-
-<div class="caption">
-Single-Teacher OPD framework.
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-
-<h2>
-Multi-Teacher OPD
-</h2>
-
-
-<p>
-
-To improve scalability and robustness,
-we extend our framework to Multi-Teacher On-Policy Agentic Distillation.
-
-Multiple teachers provide complementary planning signals,
-allowing the student agent to acquire diverse strategies
-and improve generalization across long-horizon tasks.
-
-
-</p>
-
-
-
-<img class="figure"
-src="assets/multi_teacher.png">
-
-
-<div class="caption">
-Multi-Teacher OPD framework.
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<section>
-
-
-<h2>
-Citation
-</h2>
-
-
-<div class="bibtex">
-
-@article{PlanPhys,
-  title={The Physics of Multi-Turn Long-Horizon Planning: From Pre-training to Post-training via Single and Multi Teachers On-Policy Agentic Distillation},
-  author={},
-  journal={},
-  year={}
-}
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<footer>
-
-Project Page for
-<br>
-"The Physics of Multi-Turn Long-Horizon Planning"
-
-</footer>
-
-
-
-</div>
-
-
+  <nav class="topbar" aria-label="Primary navigation">
+    <a class="brand" href="#top"><span class="brand-mark">L</span><span>PlanPhys</span></a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#findings">Findings</a>
+      <a href="#citation">Citation</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <p class="kicker">Towards the multi-turn long-horizon agentic era</p>
+    <h1>The Physics of Multi-Turn <span>Long-Horizon Planning</span></h1>
+    <p class="subtitle">From pre-training to post-training via single- and multi-teacher on-policy agentic distillation</p>
+    <div class="authors"><strong>Tianyi Men</strong><span>Chinese Academy of Sciences</span></div>
+    <div class="link-row">
+      <a class="button button-primary" href="paper.pdf">Paper <span>↗</span></a>
+      <a class="button" href="https://github.com/Quester-one/PlanPhysCode">Code <span>↗</span></a>
+      <a class="button" href="https://huggingface.co/MultimodalAgent/TianyiMen_PlanPhys_Models">Models <span>↗</span></a>
+      <a class="button" href="https://huggingface.co/datasets/MultimodalAgent/TianyiMen_PlanPhys_Datasets">Datasets <span>↗</span></a>
+    </div>
+    <figure class="hero-figure">
+      <img src="assets/figures/introduction.png" alt="Overview of experiments across pre-training, single-teacher OPD, and multi-teacher OPD">
+    </figure>
+  </header>
+
+  <main>
+    <section class="abstract section" id="overview">
+      <div class="section-label">Abstract</div>
+      <div class="abstract-copy">
+        <h2>Where does long-horizon planning come from?</h2>
+        <p>Multi-turn long-horizon planning is a critical ability for foundation-model agents, yet how it improves across training stages remains unclear. We introduce a controlled environment that varies task length, planning difficulty, data quality, planning knowledge, and planning patterns.</p>
+        <p>Across pre-training, single-teacher post-training, and multi-teacher model merging, our experiments reveal how planning ability is acquired, shaped, and integrated—and where each training strategy reaches its limits.</p>
+        <div class="keyword-row">
+          <span>Multi-turn</span><span>Long-horizon</span><span>Agentic planning</span>
+          <span>RL</span><span>OPD</span><span>MOPD</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="framework section">
+      <div class="section-intro">
+        <div><div class="section-label">Controlled Planning Gym</div><h2>A laboratory for planning capability.</h2></div>
+        <p>Hierarchical skill graphs become simulated environments spanning Fantasy Alchemy, Livestock Farming, and Electronic Assembly. The setup precisely controls horizon, difficulty, trajectory quality, knowledge, and planning patterns.</p>
+      </div>
+      <figure class="paper-figure wide-figure">
+        <img src="assets/figures/task.png" alt="Controlled planning gym, skill graph, environment interaction, and training pipeline">
+        <figcaption>The controllable long-horizon agentic planning framework.</figcaption>
+      </figure>
+      <div class="metrics">
+        <div><strong>3</strong><span>environments</span></div>
+        <div><strong>5</strong><span>planning levels</span></div>
+        <div><strong>200</strong><span>categories / environment</span></div>
+        <div><strong>400</strong><span>state transitions / environment</span></div>
+      </div>
+    </section>
+
+    <section class="findings section" id="findings">
+      <div class="section-intro">
+        <div><div class="section-label">Three training stages</div><h2>One capability, three different mechanisms.</h2></div>
+        <p>The same controlled environment lets us follow planning ability from its origin in pre-training through single- and multi-teacher post-training.</p>
+      </div>
+      <div class="stage-list">
+        <article class="stage">
+          <div class="stage-number">01</div>
+          <div class="stage-content">
+            <div class="stage-eyebrow">Pre-training</div>
+            <h3>Planning begins with an internal world model.</h3>
+            <p>We isolate three data factors—format, distribution, and quality—to trace how long-horizon ability is acquired before post-training.</p>
+            <ul>
+              <li>Chain-of-thought state-transition modeling improves long-horizon generalization.</li>
+              <li>Atomic skills do not compose automatically, but a small amount of long-horizon data activates the capability.</li>
+              <li>Suboptimal trajectories are especially harmful because errors accumulate across long sequences.</li>
+            </ul>
+          </div>
+          <figure class="paper-figure">
+            <img src="assets/figures/scaling_pretrain_distribution.png" alt="Pre-training data distribution experiment">
+            <figcaption>A small fraction of long-horizon data substantially improves compositional generalization.</figcaption>
+          </figure>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">02</div>
+          <div class="stage-content">
+            <div class="stage-eyebrow">Single-teacher post-training</div>
+            <h3>Planning patterns and knowledge behave differently.</h3>
+            <p>Shared planning behaviors are low-information patterns, while procedures and task-specific solutions are high-information knowledge.</p>
+            <ul>
+              <li>OPD has a broader effective boundary than GRPO under low-quality pre-training and long horizons.</li>
+              <li>Dense teacher feedback yields more directionally stable updates than sparse outcome rewards.</li>
+              <li>Distilling unseen multi-path procedures can damage the student’s existing world model.</li>
+            </ul>
+          </div>
+          <figure class="paper-figure">
+            <img src="assets/figures/reward_text_bar.png" alt="Single-teacher OPD and GRPO comparison">
+            <figcaption>OPD recovers planning patterns more reliably across difficult training regimes.</figcaption>
+          </figure>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">03</div>
+          <div class="stage-content">
+            <div class="stage-eyebrow">Multi-teacher model merging</div>
+            <h3>Capability transfer depends on shared structure.</h3>
+            <p>MOPD integrates expert policies by finding shared distributions across environments, revealing when merging enables transfer and when it causes interference.</p>
+            <ul>
+              <li>Shared, compatible patterns enable cross-environment generalization.</li>
+              <li>Partially shared but conflicting patterns can support continual learning.</li>
+              <li>Fully conflicting patterns with no shared structure cause catastrophic forgetting.</li>
+            </ul>
+          </div>
+          <figure class="paper-figure">
+            <img src="assets/figures/MOPD.png" alt="Multi-teacher OPD framework">
+            <figcaption>Multi-teacher OPD studies compatibility, conflict, and shared planning structure.</figcaption>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <section class="takeaway section">
+      <div class="takeaway-tag">Central takeaway</div>
+      <blockquote>Long-horizon planning improves when training signals match the structure of the capability being transferred.</blockquote>
+      <p>World models need the right data distribution. General planning patterns benefit from dense on-policy distillation. Procedural knowledge requires compatible paths. Multi-teacher merging succeeds only when experts share useful structure.</p>
+    </section>
+
+    <section class="citation section" id="citation">
+      <div>
+        <div class="section-label">Citation</div>
+        <h2>Use this work</h2>
+        <p>The full manuscript and research artifacts are available through the links above.</p>
+      </div>
+      <pre><code>@article{men2026planphys,
+  title={The Physics of Multi-Turn Long-Horizon Planning:
+    From Pre-training to Post-training via Single and Multi
+    Teachers On-Policy Agentic Distillation},
+  author={Men, Tianyi},
+  year={2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#top"><span class="brand-mark">L</span><span>PlanPhys</span></a>
+    <p>Research project page · Tianyi Men · CASIA</p>
+    <a href="paper.pdf">Read the paper ↗</a>
+  </footer>
 </body>
-
 </html>
