@@ -11,13 +11,14 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="research-figures-v2.css">
+  <link rel="stylesheet" href="research-figures-v3.css">
 </head>
 <body>
   <nav class="topbar" aria-label="Primary navigation">
     <a class="brand" href="#top"><span class="brand-mark">L</span><span>PlanPhys</span></a>
     <div class="nav-links">
       <a href="#overview">Overview</a>
+      <a href="#research-questions">Questions</a>
       <a href="#findings">Findings</a>
       <a href="#citation">Citation</a>
     </div>
@@ -50,6 +51,36 @@
         <div class="keyword-row">
           <span>Multi-turn</span><span>Long-horizon</span><span>Agentic planning</span>
           <span>RL</span><span>OPD</span><span>MOPD</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="questions section" id="research-questions" aria-labelledby="fundamental-question-title">
+      <div class="question-shell">
+        <div class="question-main">
+          <div class="question-main-copy">
+            <p class="question-label question-label-red">Fundamental Question for Multi-Turn Long-Horizon Planning</p>
+            <h2 id="fundamental-question-title">How can we <em>fundamentally improve</em> the long-horizon planning ability of foundation models <em>across different training stages</em>?</h2>
+          </div>
+          <img class="planning-giraffe" src="assets/illustrations/giraffe-planning.png" alt="A cartoon giraffe using a telescope to look toward a long planning horizon">
+        </div>
+
+        <div class="subquestion-card">
+          <p class="question-label">Fundamental Sub-questions for Multi-Turn Long-Horizon Planning</p>
+          <div class="subquestion-list">
+            <article>
+              <span>01 · Pre-training Stage</span>
+              <p>How does pre-training data acquire long-horizon planning through world-model internalization, atomic-skill composition, and trajectory quality?</p>
+            </article>
+            <article>
+              <span>02 · Single-Teacher Post-training Stage</span>
+              <p>How does RL shape long-horizon planning, and what are the applicable boundaries of RL algorithms in shaping planning knowledge and patterns?</p>
+            </article>
+            <article>
+              <span>03 · Multi-Teacher Model Merging Stage</span>
+              <p>How does model merging integrate long-horizon planning capabilities to enable cross-environment generalization, continual learning, and teacher-conflict resolution?</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
