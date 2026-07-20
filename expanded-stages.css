@@ -90,6 +90,22 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.figure-pair .paper-figure {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.figure-pair .paper-figure img {
+  background: #fff;
+  height: 330px;
+  object-fit: contain;
+}
+
+.figure-pair .paper-figure figcaption {
+  flex: 1;
+}
+
 .study-figure {
   width: 100%;
 }
@@ -199,6 +215,10 @@
 
   .figure-pair {
     grid-template-columns: 1fr;
+  }
+
+  .figure-pair .paper-figure img {
+    height: 280px;
   }
 
   .condition-card {
