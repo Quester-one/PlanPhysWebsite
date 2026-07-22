@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="research-figures-v3.css">
+  <link rel="stylesheet" href="research-figures-v4.css">
 </head>
 <body>
   <nav class="topbar" aria-label="Primary navigation">
@@ -20,6 +20,7 @@
       <a href="#overview">Overview</a>
       <a href="#research-questions">Questions</a>
       <a href="#findings">Findings</a>
+      <a href="#discussion">Discussion</a>
       <a href="#citation">Citation</a>
     </div>
   </nav>
@@ -29,15 +30,15 @@
     <p class="kicker">Towards the multi-turn long-horizon agentic era</p>
     <h1>The Physics of Multi-Turn <span>Long-Horizon Planning</span></h1>
     <p class="subtitle">From pre-training to post-training via single- and multi-teacher on-policy agentic distillation</p>
-    <div class="authors"><strong>Tianyi Men</strong><span>Chinese Academy of Sciences</span></div>
+    <div class="authors"><strong>Tianyi Men</strong><span>CASIA</span><span>University of Chinese Academy of Sciences</span></div>
     <div class="link-row">
-      <a class="button button-primary" href="paper.pdf">Paper <span>↗</span></a>
+      <a class="button button-primary" href="paper-v4.pdf">Paper <span>↗</span></a>
       <a class="button" href="https://github.com/Quester-one/PlanPhysCode">Code <span>↗</span></a>
       <a class="button" href="https://huggingface.co/MultimodalAgent/TianyiMen_PlanPhys_Models">Models <span>↗</span></a>
       <a class="button" href="https://huggingface.co/datasets/MultimodalAgent/TianyiMen_PlanPhys_Datasets">Datasets <span>↗</span></a>
     </div>
     <figure class="hero-figure">
-      <img src="assets/figures/introduction.png" alt="Overview of experiments across pre-training, single-teacher OPD, and multi-teacher OPD">
+      <img src="assets/figures/introduction-v4.png" alt="Updated overview of experiments across pre-training, single-teacher OPD, and multi-teacher OPD">
     </figure>
   </header>
 
@@ -46,8 +47,8 @@
       <div class="section-label">Abstract</div>
       <div class="abstract-copy">
         <h2>Where does long-horizon planning come from?</h2>
-        <p>Multi-turn long-horizon planning is a critical ability for foundation-model agents, yet how it improves across training stages remains unclear. We introduce a controlled environment that varies task length, planning difficulty, data quality, planning knowledge, and planning patterns.</p>
-        <p>Across pre-training, single-teacher post-training, and multi-teacher model merging, our experiments reveal how planning ability is acquired, shaped, and integrated—and where each training strategy reaches its limits.</p>
+        <p>Multi-turn long-horizon planning is critical for foundation-model agents, yet existing models are trained on opaque, uncontrollable Internet data. This makes it difficult to determine where planning ability originates or how each training stage strengthens it.</p>
+        <p>Our controlled environment varies task length, planning difficulty, data quality, planning knowledge, and planning patterns. Across pre-training, single-teacher post-training, and multi-teacher model merging, it reveals how planning ability is acquired, shaped, integrated, and sometimes overwritten.</p>
         <div class="keyword-row">
           <span>Multi-turn</span><span>Long-horizon</span><span>Agentic planning</span>
           <span>RL</span><span>OPD</span><span>MOPD</span>
@@ -91,7 +92,7 @@
         <p>Hierarchical skill graphs become simulated environments spanning Fantasy Alchemy, Livestock Farming, and Electronic Assembly. The setup precisely controls horizon, difficulty, trajectory quality, knowledge, and planning patterns.</p>
       </div>
       <figure class="paper-figure wide-figure">
-        <img src="assets/figures/task.png" alt="Controlled planning gym, skill graph, environment interaction, and training pipeline">
+        <img src="assets/figures/task-v4.png" alt="Updated controlled planning gym, skill graph, environment interaction, and training pipeline">
         <figcaption>The controllable long-horizon agentic planning framework.</figcaption>
       </figure>
       <div class="metrics">
@@ -122,16 +123,16 @@
               <span class="study-index">01.1 · Data format</span>
               <h4>Explicit state transitions teach a reusable world model.</h4>
               <p>We compare direct-answer training with chain-of-thought trajectories that expose the intermediate state after every action. Direct answering fits quickly, but reaches a lower ceiling as the test trajectory grows longer.</p>
-              <p>State-transition supervision asks the model to predict how the world changes, not just the final answer. This internalized skill world model produces the clearest gains on middle- and high-level planning tasks and continues to improve with scale.</p>
+              <p>State-transition supervision asks the model to predict how the environment moves from the current state to the next state, not just the final action. The model performs depth-first search inside its chain of thought, composing atomic skill transitions into a reusable internal simulator.</p>
               <div class="evidence-note"><strong>Finding</strong><span>Making the transition process observable is more valuable than optimizing only for short-path convergence.</span></div>
             </div>
             <div class="figure-pair">
               <figure class="paper-figure">
-                <img src="assets/figures/scaling_pretrain_bar.png" alt="World-model and direct-answer pre-training comparison">
+                <img src="assets/figures/scaling_pretrain_bar-v4.png" alt="Updated world-model and direct-answer pre-training comparison">
                 <figcaption>Explicit world-model supervision improves generalization as planning depth increases.</figcaption>
               </figure>
               <figure class="paper-figure">
-                <img src="assets/figures/scaling_pretrain_passk.png" alt="Pass-at-k scaling curves for world-model pre-training">
+                <img src="assets/figures/scaling_pretrain_passk-v4.png" alt="Updated pass-at-k scaling curves for world-model pre-training">
                 <figcaption>Pass@k shows that the advantage is not limited to one greedy trajectory.</figcaption>
               </figure>
             </div>
@@ -140,12 +141,12 @@
             <div class="study-copy">
               <span class="study-index">01.2 · Data distribution</span>
               <h4>Atomic skills do not automatically compose.</h4>
-              <p>A model trained only on short transitions can master local operations yet fail to chain them: average@8 reaches 89.84 on low-level tasks, but only 0.39 at the middle level and 0.00 on long-horizon tasks.</p>
-              <p>With the full short- and middle-level curriculum plus only 5% long-horizon examples, performance jumps to 88.26, 41.59, and 9.48. A few long examples act as a compositional bridge.</p>
+              <p>A model trained only on short tasks can master atomic operations yet fail to compose them: pass@8 reaches 93.12% on short-horizon tasks, but only 0.83% at the middle level and 0.00% on long-horizon tasks.</p>
+              <p>Minimal exposure activates composition. Adding only 5% middle-horizon trajectories raises middle pass@8 to 51.88%, while adding 5% long-horizon trajectories raises long-horizon pass@8 from 0.00% to 11.46%.</p>
               <div class="evidence-note"><strong>Finding</strong><span>Coverage of the composition rule matters more than filling the dataset with isolated primitives.</span></div>
             </div>
             <figure class="paper-figure study-figure">
-              <img src="assets/figures/scaling_pretrain_distribution.png" alt="Effect of horizon distribution on compositional generalization">
+              <img src="assets/figures/scaling_pretrain_distribution-v4.png" alt="Updated effect of horizon distribution on compositional generalization">
               <figcaption>A small fraction of long-horizon data activates generalization beyond observed lengths.</figcaption>
             </figure>
           </div>
@@ -154,11 +155,11 @@
               <span class="study-index">01.3 · Data quality</span>
               <h4>Long sequences amplify imperfect demonstrations.</h4>
               <p>Several different optimal templates preserve nearly the same generalization, showing that diversity among correct solutions is safe. Failure appears when suboptimal actions enter the training distribution.</p>
-              <p>With a 4:8 mixture of optimal and suboptimal trajectories, middle- and high-level performance collapses toward zero. Small step-level errors compound and corrupt later decisions.</p>
-              <div class="evidence-note"><strong>Finding</strong><span>Trajectory correctness is a structural requirement for long-horizon pre-training.</span></div>
+              <p>With a 4:8 mixture of optimal and suboptimal trajectories, pass@8 falls to 66.0% on short tasks, 0.8% on middle tasks, and 0.0% on long tasks. Small step-level errors compound and corrupt every later decision.</p>
+              <div class="evidence-note"><strong>Finding</strong><span>Trajectory correctness is structural: massive sampling cannot recover long-horizon success once suboptimal behavior is internalized.</span></div>
             </div>
             <figure class="paper-figure study-figure">
-              <img src="assets/figures/pretrain_pattern_bar.png" alt="Optimal and suboptimal trajectory patterns in pre-training">
+              <img src="assets/figures/pretrain_pattern_bar-v4.png" alt="Updated optimal and suboptimal trajectory patterns in pre-training">
               <figcaption>Optimal diversity remains robust; suboptimal trajectories sharply damage planning.</figcaption>
             </figure>
           </div>
@@ -178,37 +179,77 @@
               <span class="study-index">02.1 · Planning patterns</span>
               <h4>Dense teacher feedback extends the learnable boundary.</h4>
               <p>For general reasoning patterns, OPD remains effective under weaker pre-training and at longer horizons than outcome-reward GRPO. A sparse score covers a whole trajectory, so the useful direction becomes noisy or vanishes as decisions accumulate.</p>
-              <p>OPD compares student and teacher token by token on student-sampled states. The map has three regimes: SFT when knowledge is missing; RL for low-information patterns; and a long-horizon region where outcome rewards become ineffective.</p>
-              <div class="evidence-note"><strong>Mechanism</strong><span>Teacher logits turn a delayed outcome into local corrective signals at every step.</span></div>
+              <p>OPD compares student and teacher token by token on student-sampled states. The map has three regimes: SFT for high-information knowledge; RL for reusable low-information patterns; and a long-horizon region where sparse outcome rewards become unsupported.</p>
+              <p>Within the effective region, GRPO can retain more sampling diversity and a higher pass@k ceiling, while OPD mode-seeks the teacher pattern and reduces entropy. At very long horizons, near-zero pre-RL pass@k can also underestimate capabilities that exist but are rarely sampled as complete successful trajectories.</p>
+              <div class="evidence-note"><strong>Mechanism</strong><span>Fine-grained teacher logits stabilize local decisions, but teacher quality and student-teacher token overlap bound OPD's ceiling.</span></div>
             </div>
             <div class="figure-pair">
               <figure class="paper-figure">
-                <img src="assets/figures/reward_text_bar.png" alt="OPD and GRPO comparison across training regimes">
+                <img src="assets/figures/reward_text_bar-v4.png" alt="Updated OPD and GRPO applicability regions and pass-at-k comparison">
                 <figcaption>OPD retains a broader effective region than GRPO.</figcaption>
               </figure>
               <figure class="paper-figure">
-                <img src="assets/figures/multi_reward_curves.png" alt="OPD and reward-learning training curves">
+                <img src="assets/figures/multi_reward_curves-v4.png" alt="Updated OPD and reward-learning training curves">
                 <figcaption>The curves reveal the more stable signal supplied by the teacher policy.</figcaption>
               </figure>
+            </div>
+            <div class="mechanism-panel">
+              <div class="mechanism-copy">
+                <span class="study-index">Gradient direction analysis</span>
+                <h4>Long horizons make coarse GRPO updates noisy—or make them vanish.</h4>
+                <p>SVD analysis tracks whether intermediate gradients remain aligned with the final optimization subspace. GRPO is consistent only in restricted short-horizon, high-quality settings. As horizons and non-optimal actions increase, its directions diverge and some curves remain flat at zero. OPD preserves high principal-direction similarity across the evaluated regimes.</p>
+                <div class="evidence-note"><strong>New result</strong><span>Cross-sample generalization depends on structurally aligned principal gradient directions; fine-grained credit assignment supplies that alignment.</span></div>
+              </div>
+              <div class="figure-pair">
+                <figure class="paper-figure">
+                  <img src="assets/figures/SVD-v4.png" alt="Conceptual comparison of gradient directions for GRPO and OPD">
+                  <figcaption>Coarse trajectory rewards lose direction consistency as horizon and data noise grow.</figcaption>
+                </figure>
+                <figure class="paper-figure">
+                  <img src="assets/figures/para_direction_top5-v4.png" alt="Top-five SVD direction similarity across GRPO and OPD checkpoints">
+                  <figcaption>OPD maintains stronger alignment between intermediate and final dominant update directions.</figcaption>
+                </figure>
+              </div>
             </div>
           </div>
           <div class="study-row study-row-reverse">
             <div class="study-copy">
               <span class="study-index">02.2 · Planning knowledge</span>
               <h4>Unseen procedures can overwrite the student’s world model.</h4>
-              <p>We compare matched Student A–Teacher A with mismatched Student A–Teacher B. A compatible procedure strengthens the student; unseen multi-path knowledge can collapse both in-distribution and out-of-distribution ability.</p>
-              <p>The teacher may penalize a valid alternative path, while local updates cannot install an entirely new procedural system. High-information transfer needs path compatibility or explicit knowledge injection.</p>
+              <p>We compare matched Student A–Teacher A with mismatched Student A–Teacher B. A compatible procedure strengthens the student; unseen multi-path knowledge causes a substantial collapse of in-distribution procedural knowledge while only mildly degrading OOD generalization.</p>
+              <p>The teacher may assign high KL loss to a valid alternative path, while small RL updates cannot install an entirely new sample-specific procedural system. High-information transfer therefore needs aligned world models, explicit knowledge injection, and error-state recovery data.</p>
               <div class="evidence-note"><strong>Boundary</strong><span>Imitation is unsafe when teacher and student disagree about how states evolve.</span></div>
             </div>
             <div class="figure-pair">
               <figure class="paper-figure">
-                <img src="assets/figures/gap.png" alt="Matched and mismatched planning knowledge comparison">
+                <img src="assets/figures/gap-v4.png" alt="Updated matched and mismatched planning knowledge comparison">
                 <figcaption>Matched procedures improve capability; mismatched knowledge opens a gap.</figcaption>
               </figure>
               <figure class="paper-figure">
-                <img src="assets/figures/multi_reward_gap.png" alt="Training curves for mismatched knowledge distillation">
+                <img src="assets/figures/multi_reward_gap-v4.png" alt="Updated training curves for mismatched knowledge distillation">
                 <figcaption>Optimization exposes collapse under conflicting multi-path knowledge.</figcaption>
               </figure>
+            </div>
+            <div class="mechanism-panel">
+              <div class="mechanism-copy">
+                <span class="study-index">Token-level dynamics</span>
+                <h4>OPD learns shared patterns early, then fails on mismatched knowledge late.</h4>
+                <p>At early checkpoints, optimization primarily changes reusable planning-pattern tokens and rewards improve. Later, training reaches sample-specific procedural tokens: crossed teachers treat correct student tokens as wrong, KL remains elevated, and existing knowledge is overwritten before the new procedure is fully acquired.</p>
+              </div>
+              <figure class="paper-figure analysis-figure">
+                <img src="assets/figures/student_teacher_kl_correlation-v4.png" alt="Token-level KL distributions for matched and crossed teachers over training">
+                <figcaption>Matched and crossed KL distributions separate as optimization moves from shared patterns to task-specific knowledge.</figcaption>
+              </figure>
+              <div class="figure-pair heatmap-pair">
+                <figure class="paper-figure">
+                  <img src="assets/figures/token_probability_heatbars_step0_row0-v4.png" alt="Early-stage token probability heatmap">
+                  <figcaption>Step 0: optimization mainly targets broadly shared planning-pattern tokens.</figcaption>
+                </figure>
+                <figure class="paper-figure">
+                  <img src="assets/figures/token_probability_heatbars_step75_row0-v4.png" alt="Late-stage token probability heatmap">
+                  <figcaption>Step 75: sample-specific knowledge mismatch produces incorrect teacher penalties.</figcaption>
+                </figure>
+              </div>
             </div>
           </div>
         </article>
@@ -223,7 +264,7 @@
             </div>
           </header>
           <figure class="paper-figure wide-figure merge-framework">
-            <img src="assets/figures/MOPD.png" alt="Multi-teacher on-policy distillation framework">
+            <img src="assets/figures/MOPD-v4.png" alt="Updated multi-teacher on-policy agentic distillation framework">
             <figcaption>MOPD queries specialists on student-generated states and merges their policy directions.</figcaption>
           </figure>
           <div class="condition-grid">
@@ -233,9 +274,9 @@
               <p>MOPD mode-seeks the teachers’ common distribution. The student generalizes a shared pattern when it already has support in the base policy.</p>
             </div>
             <div class="condition-card">
-              <span>Partially shared + conflicting</span>
+              <span>Shared + conflicting</span>
               <h4>Common structure anchors continual learning.</h4>
-              <p>Task-specific directions coexist around a shared core, adding new skills while retaining earlier domains.</p>
+              <p>Even when teacher preferences conflict, a usable shared pattern lets sequential distillation add new skills while preserving earlier domains.</p>
             </div>
             <div class="condition-card condition-danger">
               <span>Non-shared + conflicting</span>
@@ -251,11 +292,11 @@
             </div>
             <div class="figure-pair">
               <figure class="paper-figure">
-                <img src="assets/figures/part_3_general_pattern_44b_second_token_ridgeline.png" alt="Merging curves for shared compatible teachers">
+                <img src="assets/figures/part_3_general_pattern_44b_second_token_ridgeline-v4.png" alt="Updated merging curves for shared compatible teachers">
                 <figcaption>Shared-compatible distributions converge toward a reusable common mode.</figcaption>
               </figure>
               <figure class="paper-figure">
-                <img src="assets/figures/part_3_general_pattern_44d_second_token_ridgeline.png" alt="Merging curves under conflicting teachers">
+                <img src="assets/figures/part_3_general_pattern_44d_second_token_ridgeline-v4.png" alt="Updated merging curves under conflicting teachers">
                 <figcaption>Conflict shifts the distribution away from the previous domain.</figcaption>
               </figure>
             </div>
@@ -265,13 +306,37 @@
               <span class="study-index">Parameter-space view</span>
               <h4>Useful merging is a small, structured movement—not parameter averaging.</h4>
               <p>PCA shows that MOPD checkpoints remain close to the instruction-tuned initialization. Each teacher contributes a compact update direction while compatible components accumulate into a shared capability.</p>
-              <p>Compatible updates add task-specific information without destroying the base model; unaligned directions compete when no common structure constrains them.</p>
+              <p>Compatible updates add task signals without destroying the base model; unaligned directions compete when no common structure constrains them. The same small-update property also explains why OPD cannot inject large-scale task-specific knowledge that is absent from pre-training.</p>
             </div>
             <figure class="paper-figure study-figure">
-              <img src="assets/figures/parameter_change.png" alt="PCA of parameter changes during multi-teacher merging">
+              <img src="assets/figures/parameter_change-v4.png" alt="Updated PCA of parameter changes during multi-teacher merging">
               <figcaption>Checkpoint geometry reveals task-specific directions around a shared model anchor.</figcaption>
             </figure>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="discussion-section section" id="discussion">
+      <div class="section-intro">
+        <div><div class="section-label">Discussion</div><h2>What the controlled results imply.</h2></div>
+        <p>The updated manuscript connects optimization geometry, generalization, and sim-to-real transfer beyond the individual benchmark results.</p>
+      </div>
+      <div class="discussion-grid">
+        <article>
+          <span>Credit assignment</span>
+          <h3>GRPO consistency is conditional.</h3>
+          <p>Coarse outcome rewards can work for single-step reasoning, but multi-turn trajectories mix good and bad actions. Early gradient directions then lose alignment or vanish, limiting methods that amplify those early updates.</p>
+        </article>
+        <article>
+          <span>Generalization</span>
+          <h3>Cross-sample alignment is the mechanism.</h3>
+          <p>OPD keeps dominant gradient directions structurally aligned across samples and checkpoints. This shared geometry—not update magnitude alone—supports transfer to unseen examples with similar gradient profiles.</p>
+        </article>
+        <article>
+          <span>Sim-to-real</span>
+          <h3>Transfer needs shared planning support.</h3>
+          <p>Simulation can activate patterns that are also supported in the real environment, but observation and procedural-knowledge gaps remain. SFT must account for both environment knowledge and process knowledge.</p>
         </article>
       </div>
     </section>
@@ -301,7 +366,7 @@
   <footer>
     <a class="brand" href="#top"><span class="brand-mark">L</span><span>PlanPhys</span></a>
     <p>Research project page · Tianyi Men · CASIA</p>
-    <a href="paper.pdf">Read the paper ↗</a>
+    <a href="paper-v4.pdf">Read the paper ↗</a>
   </footer>
 </body>
 </html>
