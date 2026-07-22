@@ -363,51 +363,7 @@
   max-height: 660px;
 }
 
-.discussion-section {
-  border-top: 1px solid var(--line);
-}
-
-.discussion-grid {
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.discussion-grid article {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 30px;
-}
-
-.discussion-grid span {
-  color: var(--blue);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.discussion-grid h3 {
-  font-size: 25px;
-  letter-spacing: -.03em;
-  line-height: 1.15;
-  margin: 14px 0;
-}
-
-.discussion-grid p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
-  margin: 0;
-}
-
 @media (max-width: 860px) {
-  .discussion-grid {
-    grid-template-columns: 1fr;
-  }
-
   .question-shell {
     padding: 34px;
   }

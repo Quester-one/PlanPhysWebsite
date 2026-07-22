@@ -20,7 +20,6 @@
       <a href="#overview">Overview</a>
       <a href="#research-questions">Questions</a>
       <a href="#findings">Findings</a>
-      <a href="#discussion">Discussion</a>
       <a href="#citation">Citation</a>
     </div>
   </nav>
@@ -313,30 +312,6 @@
               <figcaption>Checkpoint geometry reveals task-specific directions around a shared model anchor.</figcaption>
             </figure>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="discussion-section section" id="discussion">
-      <div class="section-intro">
-        <div><div class="section-label">Discussion</div><h2>What the controlled results imply.</h2></div>
-        <p>The updated manuscript connects optimization geometry, generalization, and sim-to-real transfer beyond the individual benchmark results.</p>
-      </div>
-      <div class="discussion-grid">
-        <article>
-          <span>Credit assignment</span>
-          <h3>GRPO consistency is conditional.</h3>
-          <p>Coarse outcome rewards can work for single-step reasoning, but multi-turn trajectories mix good and bad actions. Early gradient directions then lose alignment or vanish, limiting methods that amplify those early updates.</p>
-        </article>
-        <article>
-          <span>Generalization</span>
-          <h3>Cross-sample alignment is the mechanism.</h3>
-          <p>OPD keeps dominant gradient directions structurally aligned across samples and checkpoints. This shared geometry—not update magnitude alone—supports transfer to unseen examples with similar gradient profiles.</p>
-        </article>
-        <article>
-          <span>Sim-to-real</span>
-          <h3>Transfer needs shared planning support.</h3>
-          <p>Simulation can activate patterns that are also supported in the real environment, but observation and procedural-knowledge gaps remain. SFT must account for both environment knowledge and process knowledge.</p>
         </article>
       </div>
     </section>
