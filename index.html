@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="research-figures-v8.css">
+  <link rel="stylesheet" href="research-figures-v8.css?v=tables">
 </head>
 <body>
   <nav class="topbar" aria-label="Primary navigation">
@@ -162,6 +162,9 @@
               <figcaption>A small fraction of long-horizon data activates generalization beyond observed lengths.</figcaption>
             </figure>
           </div>
+          <figure class="paper-table">
+            <img src="assets/table-01-pretrain-distribution.png" alt="Table 1: Pretrain distribution results for avg at 8 and pass at 8">
+          </figure>
           <div class="study-row">
             <div class="study-copy">
               <span class="study-index">01.3 · Data quality</span>
@@ -175,6 +178,24 @@
               <figcaption>Optimal diversity remains robust; suboptimal trajectories sharply damage planning.</figcaption>
             </figure>
           </div>
+          <figure class="paper-table paper-table-tall">
+            <img src="assets/table-02-pattern-and-knowledge.png" alt="Table 2: Planning pattern and planning knowledge example">
+          </figure>
+          <figure class="paper-table paper-table-compact">
+            <img src="assets/table-08-model-configuration.png" alt="Table 8: Pre-trained model architectural hyperparameters">
+          </figure>
+          <figure class="paper-table paper-table-compact">
+            <img src="assets/table-09-tokenizer-configuration.png" alt="Table 9: Tokenizer configuration and training details">
+          </figure>
+          <figure class="paper-table">
+            <img src="assets/table-10-schema-statistics.png" alt="Table 10: Pretraining schema statistics across three domains">
+          </figure>
+          <figure class="paper-table paper-table-tall">
+            <img src="assets/table-11-dataset-statistics.png" alt="Table 11: Statistics of pretrain, posttrain, and test datasets">
+          </figure>
+          <figure class="paper-table">
+            <img src="assets/table-12-sft-token-statistics.png" alt="Table 12: Estimated token statistics of SFT datasets">
+          </figure>
         </article>
 
         <article class="stage stage-expanded">
@@ -224,6 +245,9 @@
               </div>
             </div>
           </div>
+          <figure class="paper-table paper-table-tall">
+            <img src="assets/table-03-pattern-base-comparison.png" alt="Table 3: Pattern-base comparison across GRPO and OPD settings">
+          </figure>
           <div class="study-row study-row-reverse">
             <div class="study-copy">
               <span class="study-index">02.2 · Planning knowledge</span>
@@ -264,6 +288,9 @@
               </div>
             </div>
           </div>
+          <figure class="paper-table">
+            <img src="assets/table-04-knowledge-gap.png" alt="Table 4: Knowledge gap comparison for matched and mismatched teachers">
+          </figure>
         </article>
 
         <article class="stage stage-expanded">
@@ -278,6 +305,9 @@
           <figure class="paper-figure wide-figure merge-framework">
             <img src="assets/figures/MOPD-v4.png" alt="Updated multi-teacher on-policy agentic distillation framework">
             <figcaption>MOPD queries specialists on student-generated states and merges their policy directions.</figcaption>
+          </figure>
+          <figure class="paper-table">
+            <img src="assets/table-05-mopd-paradigms.png" alt="Table 5: Comparison of MOPD paradigms across foundation models">
           </figure>
           <div class="condition-grid">
             <div class="condition-card">
@@ -296,6 +326,9 @@
               <p>With no common pattern, a new expert can erase the old domain. In Form d after EA, prior-domain performance falls from 90.00 to 15.62.</p>
             </div>
           </div>
+          <figure class="paper-table paper-table-tall">
+            <img src="assets/table-06-ensemble-main.png" alt="Table 6: Multi-teacher ensemble results for shared planning patterns">
+          </figure>
           <div class="merge-curves">
             <div class="merge-curves-heading">
               <span class="study-index">Merging dynamics</span>
@@ -313,6 +346,9 @@
               </figure>
             </div>
           </div>
+          <figure class="paper-table">
+            <img src="assets/table-07-conflict-ensemble.png" alt="Table 7: Ensemble results for non-shared and conflicting planning patterns">
+          </figure>
           <div class="study-row parameter-row">
             <div class="study-copy">
               <span class="study-index">Parameter-space view</span>
