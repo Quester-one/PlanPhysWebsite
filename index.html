@@ -195,6 +195,23 @@
               <span class="study-index">02.1 · Planning patterns</span>
               <h4>Impact of Planning Pattern</h4>
               <p>We define three regions to characterize when RL can improve planning. The regions are determined by the performance gap among planning patterns and the ability of RL to discover better patterns.</p>
+              <div class="condition-grid">
+                <div class="condition-card">
+                  <span>Region A</span>
+                  <h4>Unnecessary Region</h4>
+                  <p>Different planning patterns achieve similar performance in this region. RL-based selection is unnecessary because choosing different patterns leads to comparable results.</p>
+                </div>
+                <div class="condition-card">
+                  <span>Region B</span>
+                  <h4>Effective Region</h4>
+                  <p>Different planning patterns show clear performance differences in this region. RL can discover better patterns through optimization and achieve consistent performance improvements.</p>
+                </div>
+                <div class="condition-card condition-danger">
+                  <span>Region C</span>
+                  <h4>Unsupported Region</h4>
+                  <p>Better planning patterns exist in this region, but discovering them depends on the RL algorithm design. An inappropriate RL algorithm may fail to activate the best planning pattern.</p>
+                </div>
+              </div>
               <div class="evidence-note"><strong>Takeaway</strong><span><b>Planning knowledge is better suited for SFT (unnecessary region).</b> When planning knowledge has high mutual information, different samples may require different optimization directions. The limited update magnitude of RL makes it difficult to inject such knowledge effectively.<br><br><b>Planning patterns are better suited for RL (effective region).</b> When planning patterns have low mutual information, different samples share similar optimization directions. RL can stimulate these patterns and improve generalization across samples that contain similar patterns in the pretraining corpus with high expected rewards.<br><br><b>Multi-turn long-horizon tasks need fine grained credit assignment like OPD (GRPO unsupported region).</b> Outcome based rewards struggle when correct and incorrect actions mix in long trajectories, making fine grained reward based methods necessary. OPD demonstrates a larger effective region than GRPO with an ideal teacher.<br><br><b>OPD follows teacher patterns to improve performance, but it reduces entropy and limits its upper bound.</b> In the effective region, OPD performs similarly to GRPO but scales worse with more sampling times.<br><br><b>Although pass@k exceeds the base model with large k in long-horizon tasks, we do not think that RL improves the model's capability ceiling.</b> Instead, we argue that pass@k is distorted in this setting because pre-training data may already contain the correct trajectories.<br><br><b>RL shifts CoT length toward high-reward patterns in the pretraining data.</b> The output length increases depending on whether the better planning patterns are longer.</span></div>
             </div>
             <div class="figure-pair">
@@ -213,8 +230,9 @@
             <div class="mechanism-panel">
               <div class="mechanism-copy">
                 <span class="study-index">Gradient Direction Analysis</span>
-                <h4>OPD exhibits stronger directional stability than GRPO under long-horizon and low-quality pre-training corpus settings.</h4>
-                <p>While GRPO shows inconsistent or even vanishing update directions as task horizon and non-optimal actions increase, OPD maintains consistently high subspace alignment, suggesting more reliable credit assignment in ideal teacher condition.</p>
+                <h4>Top-k Subspace for SVD</h4>
+                <p>Beyond measuring task performance, we analyze whether the model already follows the final parameter-update direction in the early stages of training. Specifically, we compare the dominant update directions of early and intermediate checkpoints with those of the final checkpoint.</p>
+                <div class="evidence-note"><strong>Takeaway</strong><span><b>OPD exhibits stronger directional stability than GRPO under long-horizon and low-quality pre-training corpus settings.</b> While GRPO shows inconsistent or even vanishing update directions as task horizon and non-optimal actions increase, OPD maintains consistently high subspace alignment, suggesting more reliable credit assignment in ideal teacher condition.</span></div>
               </div>
               <div class="figure-pair">
                 <figure class="paper-figure">
