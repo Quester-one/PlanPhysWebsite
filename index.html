@@ -204,7 +204,7 @@
             <div class="mechanism-panel">
               <div class="mechanism-copy">
                 <span class="study-index">Gradient direction analysis</span>
-                <h4>Long horizons make coarse GRPO updates noisy—or make them vanish.</h4>
+                <h4>Long horizons make coarse GRPO updates noisy or cause them to vanish.</h4>
                 <p>SVD analysis tracks whether intermediate gradients remain aligned with the final optimization subspace. GRPO is consistent only in restricted short-horizon, high-quality settings. As horizons and non-optimal actions increase, its directions diverge and some curves remain flat at zero. OPD preserves high principal-direction similarity across the evaluated regimes.</p>
                 <div class="evidence-note"><strong>New result</strong><span>Cross-sample generalization depends on structurally aligned principal gradient directions; fine-grained credit assignment supplies that alignment.</span></div>
               </div>
@@ -224,7 +224,7 @@
             <div class="study-copy">
               <span class="study-index">02.2 · Planning knowledge</span>
               <h4>Unseen procedures can overwrite the student’s world model.</h4>
-              <p>We compare matched Student A–Teacher A with mismatched Student A–Teacher B. A compatible procedure strengthens the student; unseen multi-path knowledge causes a substantial collapse of in-distribution procedural knowledge while only mildly degrading OOD generalization.</p>
+              <p>We compare matched Student A with Teacher A against mismatched Student A with Teacher B. A compatible procedure strengthens the student; unseen multi-path knowledge causes a substantial collapse of in-distribution procedural knowledge while only mildly degrading OOD generalization.</p>
               <p>The teacher may assign high KL loss to a valid alternative path, while small RL updates cannot install an entirely new sample-specific procedural system. High-information transfer therefore needs aligned world models, explicit knowledge injection, and error-state recovery data.</p>
               <div class="evidence-note"><strong>Boundary</strong><span>Imitation is unsafe when teacher and student disagree about how states evolve.</span></div>
             </div>
@@ -295,7 +295,7 @@
           <div class="merge-curves">
             <div class="merge-curves-heading">
               <span class="study-index">Merging dynamics</span>
-              <h4>The curves show convergence when distributions overlap—and divergence when they do not.</h4>
+              <h4>The curves show convergence when distributions overlap and divergence when they do not.</h4>
               <p>Compatible teachers concentrate probability on a common solution. Under conflict, the token distribution is pulled toward the latest specialist, tracking loss of the earlier capability.</p>
             </div>
             <div class="figure-pair">
@@ -312,7 +312,7 @@
           <div class="study-row parameter-row">
             <div class="study-copy">
               <span class="study-index">Parameter-space view</span>
-              <h4>Useful merging is a small, structured movement—not parameter averaging.</h4>
+              <h4>Useful merging is a small, structured movement rather than parameter averaging.</h4>
               <p>PCA shows that MOPD checkpoints remain close to the instruction-tuned initialization. Each teacher contributes a compact update direction while compatible components accumulate into a shared capability.</p>
               <p>Compatible updates add task signals without destroying the base model; unaligned directions compete when no common structure constrains them. The same small-update property also explains why OPD cannot inject large-scale task-specific knowledge that is absent from pre-training.</p>
             </div>
