@@ -424,6 +424,29 @@
   line-height: 1.72;
 }
 
+.paper-table {
+  background: #fff;
+  margin: 44px auto 68px;
+  max-width: 1100px;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.paper-table img {
+  display: block;
+  height: auto;
+  min-width: 760px;
+  width: 100%;
+}
+
+.paper-table-compact {
+  max-width: 900px;
+}
+
+.paper-table-compact img {
+  min-width: 620px;
+}
+
 @media (max-width: 860px) {
   .question-shell {
     padding: 34px;
@@ -543,5 +566,10 @@
 
   .merge-framework {
     margin-bottom: 34px;
+  }
+
+  .paper-table {
+    margin-bottom: 48px;
+    margin-top: 34px;
   }
 }
